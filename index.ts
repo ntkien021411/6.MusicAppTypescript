@@ -1,6 +1,16 @@
 import express, { Express, Request, Response } from "express";
 const app: Express = express();
-const port: Number | String = 3000;
+
+
+//Connect Database
+import * as database from "./config/database";
+database.connect();
+
+
+// ENV
+import dotenv from "dotenv";
+dotenv.config();
+const port: Number | String = process.env.PORT || 3000;
 
 
 // dùng ngôn ngữ pug
