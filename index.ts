@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express} from "express";
 const app: Express = express();
 
 
@@ -20,9 +20,11 @@ app.set("view engine", "pug");
 //Nhúng phải tĩnh css,js,images
 app.use(express.static(`./public`));
 
-app.get("/topics", async (req:Request , res:Response) =>{
-    res.render("client/pages/topics/index");
-});
+
+//Router client
+import clientRoutes from "./routes/client/index.route";
+clientRoutes(app);
+
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
