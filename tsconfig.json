@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        // "outDir": "js", //biên dịch vào thư mục js
+        "target": "ES6", //  biên dịch TS sang kiểu ES6
+        "module": "CommonJS", //CommJS là tiêu chuẩn được sử dụng trong nodejs để làm việc với các module
+        "removeComments": true, //xóa comment khi biên dịch sang file js
+        "esModuleInterop": true, // Dùng được từ khóa import thay cho require
+        "outDir": "dist",
+        
+    }
+}
