@@ -18,7 +18,7 @@ app.set("views", `./views`);
 app.set("view engine", "pug");
 
 //Nhúng phải tĩnh css,js,images
-app.use(express.static(`./public`));
+app.use(express.static(`public`));
 
 
 //Router client
