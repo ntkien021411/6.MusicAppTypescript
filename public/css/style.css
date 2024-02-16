@@ -136,6 +136,7 @@ header {
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  cursor: pointer;
 }
 
 .inner-action i {
@@ -200,7 +201,7 @@ header {
 }
 .inner-avatar {
   animation: rotate 12s linear infinite;
-  /* animation-play-state: paused; */
+  animation-play-state: paused;
 }
 
 @keyframes rotate {
@@ -210,5 +211,15 @@ header {
   to {
     transform: rotate(360deg);
   }
+}
+.inner-action.inner-like.active{
+  color: #0059ff;
+}
+.inner-action.inner-like.active i{
+  color: #0059ff;
+}
+
+.inner-like i{
+  font-weight: 900;
 }
 /*End singer-detail */

@@ -40,31 +40,64 @@ export const list = async (req: Request, res: Response) => {
 export const detail = async (req: Request, res: Response) => {
   try {
     const slug: String = req.params.slugSong;
-  const song = await Song.findOne({
-    slug: slug,
-    status: "active",
-    deleted: false,
-  });
-  
-  const topic = await Topic.findOne({
-    _id: song.topicId,
-    deleted: false,
-  }).select("title");
-  const singer = await Singer.findOne({
-    _id: song.singerId,
-    deleted: false,
-  }).select("fullName");
-  // console.log(topic);
-  // console.log(singer);
-  // console.log(song.singerId);
-  
-  res.render("client/pages/songs/detail", {
-    title: "Chi tiết bài hát",
-    song: song,
-    singer:singer,
-    topic:topic,
-  });
+    const song = await Song.findOne({
+      slug: slug,
+      status: "active",
+      deleted: false,
+    });
+
+    const topic = await Topic.findOne({
+      _id: song.topicId,
+      deleted: false,
+    }).select("title");
+    const singer = await Singer.findOne({
+      _id: song.singerId,
+      deleted: false,
+    }).select("fullName");
+    // console.log(topic);
+    // console.log(singer);
+    // console.log(song.singerId);
+
+    res.render("client/pages/songs/detail", {
+      title: "Chi tiết bài hát",
+      song: song,
+      singer: singer,
+      topic: topic,
+    });
   } catch (error) {
     res.send("404");
+  }
+};
+
+//[PATCH] /songs/:typeLike/yes/:idSong
+export const like = async (req: Request, res: Response) => {
+  try {
+    const type: String = req.params.typeLike;
+    const id: String = req.params.idSong;
+
+    const song = await Song.findOne({
+      _id: id,
+      status: "active",
+      deleted: false,
+    });
+    const newLike:number = type == "like" ?  song.like + 1 :  song.like -1;
+    await Song.updateOne(
+      {
+        _id: id,
+      },
+      {
+        like: newLike,
+      }
+    );
+    res.json({
+      code: 200,
+      message: "Like thành công!",
+      like : newLike
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Call API Fail!",
+    });
   }
 };
