@@ -69,7 +69,7 @@ export const detail = async (req: Request, res: Response) => {
   }
 };
 
-//[PATCH] /songs/:typeLike/yes/:idSong
+//[PATCH] /songs/:typeLike/:idSong
 export const like = async (req: Request, res: Response) => {
   try {
     const type: String = req.params.typeLike;
