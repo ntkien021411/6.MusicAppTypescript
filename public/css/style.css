@@ -50,6 +50,7 @@ header {
   display: flex;
   border: 1px solid #ddd;
   border-radius: 5px;
+  
 }
 
 
@@ -109,6 +110,20 @@ header {
   font-weight: 500;
   color: #585858;
 }
+
+.song-item .inner-content .inner-heart.active {
+  color: #b90000;
+}
+.song-item .inner-content .inner-heart.active i{
+  color: #b90000;
+}
+.song-item .inner-content .inner-heart i{
+  font-weight: 900;
+}
+.song-item .inner-content .inner-heart{
+  cursor: pointer;
+}
+
 /*End  song-item */
 
 
@@ -220,6 +235,17 @@ header {
 }
 
 .inner-like i{
+  font-weight: 900;
+}
+
+.inner-action.inner-heart.active {
+  color: #b90000;
+}
+.inner-action.inner-heart.active i{
+  color: #b90000;
+}
+.inner-action.inner-heart i{
+  cursor: pointer;
   font-weight: 900;
 }
 /*End singer-detail */
