@@ -2,10 +2,11 @@ import { Request, Response } from "express";
 import Song from "../../models/song.model";
 import Singer from "../../models/singer.model";
 import { convertToSlug } from "../../helpers/convertToSlug";
-//[GET] /search/result
+//[GET] /search/:type
 export const result = async (req: Request, res: Response) => {
   const keyword: string = `${req.query.keyword}`;
-  let newSong = [];
+  const type: string = req.params.type;
+  let newSongs = [];
   if (keyword) {
     const keywordRegex = new RegExp(keyword, "i");
 
@@ -13,7 +14,7 @@ export const result = async (req: Request, res: Response) => {
     const stringSlug = convertToSlug(`${keyword}`);
     const stringSlugRegex = new RegExp(stringSlug, "i");
     // console.log(stringSlugRegex);
-    
+
     const songs = await Song.find({
       $or: [
         {
@@ -28,19 +29,40 @@ export const result = async (req: Request, res: Response) => {
       const infoSinger = await Singer.findOne({
         _id: song.singerId,
       });
-      song["infoSinger"] = infoSinger;
-    }
-    newSong = songs;
-  }else{
-    const songs = await Song.find({
-       deleted:false
+      newSongs.push({
+        id : song.id,
+        title : song.title,
+        avatar : song.avatar,
+        like : song.like,
+        slug : song.slug,
+        infoSinger : {
+            fullName : infoSinger.fullName
+        },
       });
-      newSong = songs;
-  }
+    }
+    // newSongs = songs;
+  } 
 
-  res.render("client/pages/search/result", {
-    title: `Kết quả ${keyword}`,
-    keyword: keyword,
-    songs: newSong,
-  });
+  switch (type) {
+    case "result":
+      res.render("client/pages/search/result", {
+        title: `Kết quả ${keyword}`,
+        keyword: keyword,
+        songs: newSongs,
+      });
+      break;
+    case "suggest":
+      res.json({
+        code: 200,
+        message: "Thành công!",
+        songs: newSongs,
+      });
+      break;
+    default:
+      res.json({
+        code: 400,
+        message: "Thất bại!",
+      });
+      break;
+  }
 };
