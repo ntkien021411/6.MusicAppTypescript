@@ -58,7 +58,7 @@ export const detail = async (req: Request, res: Response) => {
     // console.log(singer);
     // console.log(song.singerId);
     const favoriteSong = await FavoriteSong.findOne({
-      songId : song.id
+      songId: song.id,
     });
     song["isFavoriteSong"] = favoriteSong ? true : false;
     res.render("client/pages/songs/detail", {
@@ -113,20 +113,20 @@ export const favorite = async (req: Request, res: Response) => {
     switch (type) {
       case "favorite":
         const existFavoriteSong = await FavoriteSong.findOne({
-          songId:id,
+          songId: id,
           // userId : idUser
         });
-        if(!existFavoriteSong){
-          const record =new FavoriteSong({
+        if (!existFavoriteSong) {
+          const record = new FavoriteSong({
             userId: "",
-            songId : id
+            songId: id,
           });
           await record.save();
         }
         break;
       case "unfavorite":
         await FavoriteSong.deleteOne({
-          songId:id,
+          songId: id,
         });
         break;
       default:
@@ -139,6 +139,42 @@ export const favorite = async (req: Request, res: Response) => {
     res.json({
       code: 200,
       message: "Like thành công!",
+    });
+  } catch (error) {
+    res.json({
+      code: 400,
+      message: "Call API Fail!",
+    });
+  }
+};
+
+//[PATCH] /songs/listen/:idSong
+export const listen = async (req: Request, res: Response) => {
+  try {
+    const id: String = req.params.idSong;
+    const song = await Song.findOne({
+      _id: id,
+    });
+
+    const listen: number = song.listen + 1;
+    
+    await Song.updateOne(
+      {
+        _id: song.id,
+      },
+      {
+        listen: listen,
+      }
+    );
+    
+    const newSong = await Song.findOne({
+      _id: song.id,
+    });
+    
+    res.json({
+      code: 200,
+      message: "Thành công!",
+      listen: newSong.listen,
     });
   } catch (error) {
     res.json({

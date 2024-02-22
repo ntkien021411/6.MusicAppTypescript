@@ -24,6 +24,20 @@ if (aplayer) {
   ap.on("play", function () {
     avatar.style.animationPlayState = "running";
   });
+  ap.on("ended", function () {
+    // console.log("kết thúc");
+    const link = `/songs/listen/${dataSong._id}`;
+    // console.log(link);
+    const option = {
+      method: "PATCH",
+    };
+    fetch(link, option)
+      .then((res) => res.json())
+      .then((data) => {
+        const elementListenSpan = document.querySelector(".singer-detail .inner-listen span");
+        elementListenSpan.innerHTML = `${data.listen} lượt nghe`;
+      });
+  });
 }
 //End APlayer
 
