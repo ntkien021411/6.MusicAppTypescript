@@ -2,10 +2,10 @@
     .inner-menu 
         ul 
             li 
-                a(href=`${prefixAdmin}/dashboard`) Tổng quan
+                a(href=`/${prefixAdmin}/dashboard`) Tổng quan
             //- if(role.permissions.includes("products-category_view"))
             li 
-                a(href=`${prefixAdmin}/topics`) Quản lý chủ đề
+                a(href=`/${prefixAdmin}/topics`) Quản lý chủ đề
             //- if(role.permissions.includes("products_view"))    
             li 
                 a(href=`${prefixAdmin}/songs`) Quản lý bài hát
