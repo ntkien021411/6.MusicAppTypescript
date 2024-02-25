@@ -2,6 +2,8 @@ import express, { Express} from "express";
 const app: Express = express();
 
 
+
+
 //Connect Database
 import * as database from "./config/database";
 database.connect();
@@ -11,6 +13,7 @@ database.connect();
 import dotenv from "dotenv";
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
+
 
 
 // dùng ngôn ngữ pug
@@ -25,6 +28,12 @@ import path from "path"
 app.use('/tinymce', 
 express.static(path.join(__dirname, 'node_modules', 'tinymce'))
 );
+
+// Dùng body parser
+import bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 
 
