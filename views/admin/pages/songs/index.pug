@@ -12,7 +12,7 @@ block main
 
             .col-4.text-right 
                 a(
-                  href=`/${prefixAdmin}/topics/create`
+                  href=`/${prefixAdmin}/songs/create`
                   class="btn btn-outline-success" 
                 ) + Thêm mới
 
@@ -24,6 +24,9 @@ block main
                 th STT
                 th Hình ảnh
                 th Tiêu đề
+                //- th Ca sĩ
+                //- th Chủ đề
+                //- th Vị trí
                 th Trạng thái
                 th Hành động 
             tbody
@@ -38,7 +41,10 @@ block main
                     height = "auto"
                     )
                   td #{item.title}
-                 
+                  td #{item.title}
+                  td  Ca sĩ
+                  td  Chủ đề
+                  td  Vị trí
                   td
                     if(item.status =="active")
                         a(href="javascript:;"
@@ -51,9 +57,9 @@ block main
                         data-status=item.status
                         data-id=item.id class="badge badge-danger") Dừng hoạt động
                   td
-                    a(href=`${prefixAdmin}/topics/detail/${item.id}`
+                    a(href=`${prefixAdmin}/songs/detail/${item.id}`
                       class="btn btn-secondary btn-sm") Chi tiết 
-                    a(href=`${prefixAdmin}/topics/edit/${item.id}`
+                    a(href=`${prefixAdmin}/songs/edit/${item.id}`
                         class="btn btn-warning btn-sm") Sửa
                     button(class="btn btn-danger btn-sm ml-1"
                         button-delete
