@@ -55,6 +55,16 @@ block main
                     upload-image-preview
                     class = "image-preview"
                     )
+                div(class="form-group"
+                    upload-image)
+                    label(for="audio") File âm thanh
+                    input(
+                        type="file"
+                        class="form-control-file"
+                        id="audio"
+                        name="audio"
+                        accept="audio/*"
+                    )
                 div(class="form-group")
                     label(for="desc") Mô tả
                     textarea(
