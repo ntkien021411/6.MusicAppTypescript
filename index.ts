@@ -34,7 +34,10 @@ import bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-
+//Ghi đè lại router
+import methodOverride from "method-override"
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride("_method"));
 
 
 //Biến toàn cục 
