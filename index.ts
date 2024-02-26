@@ -14,17 +14,17 @@ import dotenv from "dotenv";
 dotenv.config();
 const port: Number | String = process.env.PORT || 3000;
 
+import path, { dirname } from "path"
 
 
 // dùng ngôn ngữ pug
-app.set("views", `./views`);
+app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
 
 //Nhúng phải tĩnh css,js,images
-app.use(express.static(`public`));
+app.use(express.static(`${__dirname}/public`));
 
 //TinyMCE
-import path from "path"
 app.use('/tinymce', 
 express.static(path.join(__dirname, 'node_modules', 'tinymce'))
 );
